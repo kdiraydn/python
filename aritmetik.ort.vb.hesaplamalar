@@ -1,0 +1,72 @@
+import math
+
+print("Dizimiz kac elemanli olacak: ")
+
+diziUzunlugu = int(input())
+
+dizi = []
+
+
+i = 0
+#Dizinin tüm elemanlarını bu döngüde teker teker alıyoruz.
+while i < diziUzunlugu:
+	print("Dizimizin " + str(i + 1) + ". elemanini giriniz: ")
+	dizi.append(int(input()))
+	i = i + 1
+#Medyanı bulmak için girilen diziyi sıralıyoruz.
+dizi.sort()
+
+#Ortalamalar , medyan ve modları bulmak için değişkenleri oluşturuyoruz.
+i = 0
+aritmetikOrtalama = 0
+geometrikOrtalama = 1
+kareliOrtalama = 0
+frekansDizisi = {}
+modDizisi = []
+#Döngü ile ortalamaları bulmak için başlangıç işlemlerini yapıyoruz.
+while i < diziUzunlugu:
+	#Aritmetik ortalamaya dizideki tüm elemanları teker teker ekliyoruz.
+	aritmetikOrtalama = aritmetikOrtalama + dizi[i]
+	#Geometrik ortalamaya dizideki tüm elemanları teker teker çarpıyoruz.
+	geometrikOrtalama = geometrikOrtalama * dizi[i]
+	#Kareli ortalamaya dizideki tüm elemanların karesini teker teker ekliyoruz.
+	kareliOrtalama = kareliOrtalama + (dizi[i] * dizi[i])
+	#Medyanları bulmak için frekansDizisi dictionary mize elemanların dizide kaç tane bulunduğunu ekliyoruz
+	if dizi[i] in frekansDizisi:
+		frekansDizisi[dizi[i]] = frekansDizisi[dizi[i]] + 1
+	else:
+		frekansDizisi[dizi[i]] = 1
+	i = i + 1
+#Aritmetik ortalamayı bulmak için tüm toplamı dizinin uzunluğuna bölüyoruz.
+aritmetikOrtalama = aritmetikOrtalama / diziUzunlugu
+#Geometrik ortalamayı bulmak için tüm çarpımın dizininUzunlugu. kökünü alıyoruz.
+geometrikOrtalama = geometrikOrtalama ** (1. / diziUzunlugu)
+#Kareli ortalamayı böyle buluyoruz
+kareliOrtalama = math.sqrt(kareliOrtalama / diziUzunlugu)
+
+
+#Dizide en fazla tekrar eden sayının veya sayıların kaç kere tekrar ettiğini buluyoruz.
+kacKereTekrarEtmis = 0
+for sayi in frekansDizisi:
+	if frekansDizisi[sayi] > kacKereTekrarEtmis:
+		kacKereTekrarEtmis = frekansDizisi[sayi]
+	
+#Mod stringi değişkenimize kacKereTekrarEtmis değişkeniyle eşit tekrar eden sayıları string olarak ekliyoruz.
+modStringi = ""
+for sayi in frekansDizisi:
+	if frekansDizisi[sayi] == kacKereTekrarEtmis:
+		modStringi = modStringi + ", " + str(sayi)
+	i = i + 1
+#En baştaki virgülü çıkartıyoruz
+modStringi = modStringi[1:]
+
+#Sonuçları ekrana yazdırıyoruz.
+print("Dizimizin aritmetik ortalamasi: " + str(aritmetikOrtalama))
+print("Dizimizin geometrik ortalamasi: " + str(geometrikOrtalama))
+print("Dizimizin kareli ortalamasi: " + str(kareliOrtalama))
+print("Dizinin Modlari: " + modStringi)
+
+if diziUzunlugu % 2 == 0:
+	print("Dizimizin medyanlari: " + str(dizi[int(diziUzunlugu/2) - 1]) + ", " + str(dizi[int(diziUzunlugu/2)]))
+else:
+	print("Dizimizin medyani: " + str(dizi[int(diziUzunlugu/2)]))
