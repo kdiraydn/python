@@ -1,0 +1,21 @@
+while True:
+    try:
+        print("Bu program Gidilen km başına yakılan benzini hesaplar'.")
+         
+        
+        gidilen_km = input("Kaç Kilometre Gittiğinizi Giriniz:")
+        
+        gidilen_km = float(gidilen_km)
+         
+        
+        kullanılan_benzin = input("Kullanılan benzini yazınız:")
+        
+        kullanılan_benzin = float(kullanılan_benzin)
+         
+        
+        mpg = gidilen_km / kullanılan_benzin
+        kmbenzin=(kullanılan_benzin/gidilen_km)*6.29
+        print("Litre başına Yakılan Kilometre:", mpg)
+        print("Km başına yakılan benzin:" ,kmbenzin)
+    except ValueError:
+        print("verdiğiniz değer hatalı")
